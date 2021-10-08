@@ -31,8 +31,8 @@ namespace Ganaderia.App.Consola
         {
             var ganadero = new Ganadero
             {
-                Nombres = "David",
-                Apellidos = "Herrera",
+                Nombres = "Cesar",
+                Apellidos = "Araujo",
                 NumeroTelefono = "3148596563",
                 Direccion = "Kra 4 #45-12",
                 Correo = "sergio.mintic@ucaldas.edu.co",
