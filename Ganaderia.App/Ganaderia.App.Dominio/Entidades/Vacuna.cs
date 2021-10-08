@@ -1,3 +1,5 @@
+using System;
+
 namespace Ganaderia.App.Dominio
 { 
     public class Vacuna
@@ -7,5 +9,6 @@ namespace Ganaderia.App.Dominio
         public string Lote { get; set; }
         public string Nombre { get; set; }
         public string Fabricante { get; set; }
+        public DateTime FechaAplicacion { get; set; }
     }
 }

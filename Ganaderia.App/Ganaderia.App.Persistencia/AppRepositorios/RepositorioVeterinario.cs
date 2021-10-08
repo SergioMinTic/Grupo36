@@ -52,10 +52,10 @@ namespace Ganaderia.App.Persistencia
         //     return false;
         // }
 
-        // Veterinario IRepositorioVeterinario.GetVeterinario(int idVeterinario) 
-        // {
-        //     var veterinarioEncontrado = _appContext.Veterinarios.FirstOrDefault(g => g.Id == idVeterinario);
-        //     return veterinarioEncontrado;
-        // }
+        Veterinario IRepositorioVeterinario.GetVeterinario(int idVeterinario) 
+        {
+            var veterinarioEncontrado = _appContext.Veterinarios.FirstOrDefault(g => g.Id == idVeterinario);
+            return veterinarioEncontrado;
+        }
     }
 }

@@ -14,6 +14,6 @@ namespace Ganaderia.App.Persistencia
 
         // Boolean DeleteVeterinario(int idVeterinario);
 
-        // Veterinario GetVeterinario(int idVeterinario);
+        Veterinario GetVeterinario(int idVeterinario);
     }
 }
