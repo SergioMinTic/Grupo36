@@ -2,6 +2,7 @@ using System;
 using Ganaderia.App.Dominio;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ganaderia.App.Persistencia
 {
@@ -57,7 +58,7 @@ namespace Ganaderia.App.Persistencia
 
         Ganado IRepositorioGanado.GetGanado(int idGanado) 
         {
-            var ganadoEncontrado = _appContext.Ganado.FirstOrDefault(g => g.Id == idGanado);
+            var ganadoEncontrado = _appContext.Ganado.Where(g => g.Id == idGanado).Include(g => g.Veterinario).FirstOrDefault();
             return ganadoEncontrado;
         }
     }

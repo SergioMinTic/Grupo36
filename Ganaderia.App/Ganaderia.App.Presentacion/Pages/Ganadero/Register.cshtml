@@ -4,75 +4,148 @@
 }
 <h2>Registro de ganadero</h2>
 
-<img src="~/assets/logo-mintic.jpg" class="rounded" alt="Responsive image">
-<form>
+@* <img src="~/assets/logo-mintic.jpg" class="rounded" alt="Responsive image"> *@
 
-    <div class="form-group">
-        <label for="exampleFormControlSelect1">Ganaderos</label>
-        <select class="form-control" id="mySelect" onchange="myFunction()">
-            <option>Seleccione una opción</option>
-            @foreach (var ganadero in Model.Ganaderos)
+<table class="table">
+    <form method="post">
+        @if (Model.ganaderos != null)
+        {
+            @foreach (var ganadero in Model.ganaderos)
             {
-                <option>@ganadero.Nombres</option>
+                <tr>
+                    <td>
+                        @ganadero.Nombres
+                    </td>
+                    <td>
+                        @ganadero.Apellidos
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-danger" asp-page-handler="Del"
+                    asp-route-id="@ganadero.Id">Eliminar</button>
+                    </td>
+                </tr>
             }
-        </select>
-    </div>
-    <div class="row">
+        }
+    </form>
+</table>
+
+
+<form method="post">
+
+
+    @* <label for="exampleFormControlSelect1">Ganaderos</label>
+        <select class="form-control" id="mySelect" onchange="myFunction()">
+        <option>Seleccione una opción</option>
+        @foreach (var ganadero in Model.ganaderos)
+        {
+        <option>@ganadero.Nombres</option>
+        }
+        </select> *@
+
+    @* <div class="row">
         <div class="col">
-            <input type="text" class="form-control" placeholder="First name">
+        <input type="text" class="form-control" placeholder="First name">
         </div>
         <div class="col">
-            <input type="text" class="form-control" placeholder="Last name">
+        <input type="text" class="form-control" placeholder="Last name">
         </div>
-    </div>
+        </div> *@
     <div class="form-group">
         <label for="exampleFormControlInput1">Nombres</label>
-        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="Nombres">
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Apellidos</label>
-        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="Apellidos">
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Numero de telefono</label>
-        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="NumeroTelefono">
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Direccion</label>
+        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="Direccion">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Correo</label>
+        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="Correo">
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Contraseña</label>
+        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="Password">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Repetir contraseña</label>
         <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
     </div>
-    @if (Model.tipoPerfil == "Ganadero")
-    {
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Latitud</label>
+        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="Latitude">
+    </div>
+    @* <div class="form-group">
+        <label for="exampleFormControlInput1">Longitud</label>
+        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="Longitud">
+    </div> *@
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Especialidad</label>
+        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="Especialidad">
+    </div>
 
-
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Correo</label>
-            <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-        </div>
-    }
-    else
-    {
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Contraseña</label>
-            <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Repetir contraseña</label>
-            <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-        </div>
-
-        <div>
-            <button type="button" class="btn btn-primary">Registro</button>
-        </div>
-    }
-
-    <script>
+    <div>
+        <button class="btn btn-primary" asp-page-handler="Add">Registro</button>
+    </div>
+    @* <script>
         function myFunction() {
-            var x = document.getElementById("mySelect").value;
-            alert(x);
+        var x = document.getElementById("mySelect").value;
+        alert(x);
         }
-    </script>
+        </script> *@
 
 
 
 </form>
+
+<div>
+    <button type="button" class="btn btn-primary" onclick="getGanaderos()">Obtener ganaderos</button>
+</div>
+
+<form method="post" style="margin-top: 90px; margin-left: 18px;">
+    <div class="form-group row">
+        <label for="inputPassword">Ingrese el ganadero a buscar</label>
+        <div class="col-5">
+            <input type="text" class="form-control" id="inputPassword" placeholder="Ingrese el id" name="id">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="inputPassword">Ingrese la contraseña</label>
+        <div class="col-5">
+            <input type="text" class="form-control" id="inputPassword" placeholder="Ingrese el id" name="password">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2" asp-page-handler="SearchGanadero">Consultar</button>
+</form>
+
+@if (Model.ganaderoEncontrado != null)
+{
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">@Model.ganaderoEncontrado.Nombres</h5>
+            <p class="card-text">@Model.ganaderoEncontrado.Correo</p>
+        </div>
+    </div>
+}
+
+<script>
+    function getGanaderos() {
+        $.ajax({
+            type: "GET",
+            url: "https://localhost:5010/Ganadero",
+            // Expect a `mycustomtype` back from server
+            dataType: 'text',
+            success: function (datos) {
+                alert(datos)
+            }
+        });
+    }
+</script>

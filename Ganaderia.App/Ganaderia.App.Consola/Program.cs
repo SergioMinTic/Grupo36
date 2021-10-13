@@ -15,7 +15,7 @@ namespace Ganaderia.App.Consola
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            AddGanadero();
+            // AddGanadero();
             //GetAllGanaderos();
             //UpdateGanadero();
             //DeleteGanadero(1003);
@@ -24,7 +24,7 @@ namespace Ganaderia.App.Consola
             // AddGanado();
             //AddGanadoConVeterinario(1008);
             // AddVeterinarioaGanado(1008,7);
-            // GetVeterinariodeGanado(5);
+            GetVeterinariodeGanado(4);
         }
 
         private static void AddGanadero() 
@@ -202,9 +202,10 @@ namespace Ganaderia.App.Consola
             Console.WriteLine("La raza del ganado es: " + ganadoEncontrado.Raza);
             Console.WriteLine("La raza del alias es: " + ganadoEncontrado.Alias);
             Console.WriteLine("La raza del cantidad es: " + ganadoEncontrado.Cantidad);
-            Console.WriteLine("veterinario: " + ganadoEncontrado.Veterinario);
+            Console.WriteLine("veterinario: " + ganadoEncontrado.Veterinario.Nombres);
             if (ganadoEncontrado.Vacunas != null) {
                 Console.WriteLine("Veternario asignado");
+                Console.WriteLine("Especialidad: " + ganadoEncontrado.Veterinario.Especialidad);
             } else {
                 Console.WriteLine("No se ha asignado un vetrinario");   
             }          

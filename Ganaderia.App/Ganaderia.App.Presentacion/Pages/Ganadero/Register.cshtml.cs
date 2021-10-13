@@ -16,6 +16,8 @@ namespace Ganaderia.App.Presentacion.Pages
         public IEnumerable<Ganadero> ganaderos { get; private set; }
         public List<Ganadero> Ganaderos { get; set; }
 
+        public Ganadero ganaderoEncontrado { get; set; }
+
         public String tipoPerfil = "Veterinario";
         public void OnGet()
         {
@@ -63,5 +65,36 @@ namespace Ganaderia.App.Presentacion.Pages
 
             ganaderos = _repoGanadero.GetAllGanaderos();
         }
+
+        public void OnPostAdd(Ganadero ganadero)
+        {
+            Console.WriteLine("Nombre: " + ganadero.Nombres);
+            if (ganadero != null)
+            {
+                _repoGanadero.AddGanadero(ganadero);
+            }
+            ganaderos = _repoGanadero.GetAllGanaderos();
+        }
+
+        public void OnPostDel(int id)
+        {
+            if (id > 0)
+            {
+                Console.WriteLine("Ganadero a borrar: " + id);
+                _repoGanadero.DeleteGanadero(id);
+            }
+            ganaderos = _repoGanadero.GetAllGanaderos();
+        }
+
+        public void OnPostSearchGanadero(int id, int password)
+        {
+            if (id > 0)
+            {
+                Console.WriteLine("Ganadero a buscar: " + id);
+                ganaderoEncontrado = _repoGanadero.GetGanadero(id);
+            }
+        } 
+
+        
     }
 }
