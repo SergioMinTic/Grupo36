@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Ganaderia.App.Dominio;
 using Ganaderia.App.Persistencia;
+using System.Security.Cryptography;
 
 namespace Ganaderia.App.Presentacion.Pages
 {
@@ -21,7 +22,6 @@ namespace Ganaderia.App.Presentacion.Pages
         public String tipoPerfil = "Veterinario";
         public void OnGet()
         {
-
             // var ganadero = new Ganadero
             // {
             //     Nombres = "Mario",
@@ -68,11 +68,33 @@ namespace Ganaderia.App.Presentacion.Pages
 
         public void OnPostAdd(Ganadero ganadero)
         {
-            Console.WriteLine("Nombre: " + ganadero.Nombres);
+            Console.WriteLine("Password: " + ganadero.Password);
+            Console.WriteLine("MD5: " + ObtenerMd5(ganadero.Password));
+
+            ganadero.Password = ObtenerMd5(ganadero.Password);
+            
             if (ganadero != null)
             {
                 _repoGanadero.AddGanadero(ganadero);
             }
+            ganaderos = _repoGanadero.GetAllGanaderos();
+        }
+
+        public void OnPostEditAdd(Ganadero ganadero)
+        {
+            Console.WriteLine("ID" + ganadero.Id);
+            if (ganadero.Id > 0)
+            {
+                Console.WriteLine("Voy a editar");
+                _repoGanadero.UpdateGanadero(ganadero);
+            } else 
+            {
+                Console.WriteLine("Voy a adicionar");
+                _repoGanadero.AddGanadero(ganadero);
+            }
+
+            tipoPerfil = "Se ha hecho la operación correctamente";
+
             ganaderos = _repoGanadero.GetAllGanaderos();
         }
 
@@ -86,15 +108,39 @@ namespace Ganaderia.App.Presentacion.Pages
             ganaderos = _repoGanadero.GetAllGanaderos();
         }
 
+        public IActionResult OnPostDetail(int id)
+        {
+            TempData["ganadero"] = id;
+            return Redirect("/Ganadero/Detail");
+        }
+
         public void OnPostSearchGanadero(int id, int password)
         {
             if (id > 0)
             {
                 Console.WriteLine("Ganadero a buscar: " + id);
                 ganaderoEncontrado = _repoGanadero.GetGanadero(id);
-            }
-        } 
 
-        
+                ganaderoEncontrado.Password = "";
+            }
+
+            ganaderos = _repoGanadero.GetAllGanaderos();
+        }
+
+        public String ObtenerMd5(String input)
+        {
+            MD5CryptoServiceProvider x = new MD5CryptoServiceProvider();
+            byte[] bs = System.Text.Encoding.UTF8.GetBytes(input);
+            bs = x.ComputeHash(bs);
+            System.Text.StringBuilder s = new System.Text.StringBuilder();
+            foreach (byte b in bs)
+            {
+                s.Append(b.ToString("x2").ToLower());
+            }
+            String hash = s.ToString();
+            return hash;
+        }
+
+
     }
 }

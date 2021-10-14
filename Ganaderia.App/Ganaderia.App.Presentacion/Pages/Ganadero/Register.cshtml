@@ -3,6 +3,7 @@
 @{
 }
 <h2>Registro de ganadero</h2>
+<h2>@Model.tipoPerfil</h2>
 
 @* <img src="~/assets/logo-mintic.jpg" class="rounded" alt="Responsive image"> *@
 
@@ -22,6 +23,8 @@
                     <td>
                         <button type="submit" class="btn btn-danger" asp-page-handler="Del"
                     asp-route-id="@ganadero.Id">Eliminar</button>
+                        <button type="submit" class="btn btn-primary" asp-page-handler="Detail"
+                    asp-route-id="@ganadero.Id">Ver detalle</button>
                     </td>
                 </tr>
             }
@@ -50,30 +53,37 @@
         <input type="text" class="form-control" placeholder="Last name">
         </div>
         </div> *@
+    <input type="hidden" asp-for="ganaderoEncontrado.Id" name="Id"></input>
     <div class="form-group">
         <label for="exampleFormControlInput1">Nombres</label>
-        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="Nombres">
+        <input asp-for="ganaderoEncontrado.Nombres" class="form-control" id="exampleFormControlInput1"
+            placeholder="name@example.com" name="Nombres" required>
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Apellidos</label>
-        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="Apellidos">
+        <input asp-for="ganaderoEncontrado.Apellidos" class="form-control" id="exampleFormControlInput1"
+            placeholder="name@example.com" name="Apellidos" required>
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Numero de telefono</label>
-        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="NumeroTelefono">
+        <input asp-for="ganaderoEncontrado.NumeroTelefono" class="form-control" id="exampleFormControlInput1"
+            placeholder="name@example.com" name="NumeroTelefono">
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Direccion</label>
-        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="Direccion">
+        <input asp-for="ganaderoEncontrado.Direccion" class="form-control" id="exampleFormControlInput1"
+            placeholder="name@example.com" name="Direccion">
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Correo</label>
-        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="Correo">
+        <input type="email" asp-for="ganaderoEncontrado.Correo" class="form-control" id="exampleFormControlInput1"
+            placeholder="name@example.com" name="Correo" required>
     </div>
 
     <div class="form-group">
         <label for="exampleFormControlInput1">Contraseña</label>
-        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="Password">
+        <input asp-for="ganaderoEncontrado.Password" class="form-control" id="exampleFormControlInput1"
+            placeholder="name@example.com" name="Password">
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Repetir contraseña</label>
@@ -81,19 +91,21 @@
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Latitud</label>
-        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="Latitude">
+        <input asp-for="ganaderoEncontrado.Latitude" class="form-control" id="exampleFormControlInput1"
+            placeholder="name@example.com" name="Latitude">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Longitud</label>
+        <input asp-for="ganaderoEncontrado.Longitud" class="form-control" id="exampleFormControlInput1"
+            placeholder="name@example.com" name="Longitud">
     </div>
     @* <div class="form-group">
-        <label for="exampleFormControlInput1">Longitud</label>
-        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="Longitud">
-    </div> *@
-    <div class="form-group">
         <label for="exampleFormControlInput1">Especialidad</label>
         <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="Especialidad">
-    </div>
+        </div> *@
 
     <div>
-        <button class="btn btn-primary" asp-page-handler="Add">Registro</button>
+        <button class="btn btn-primary" asp-page-handler="EditAdd">Registro</button>
     </div>
     @* <script>
         function myFunction() {
